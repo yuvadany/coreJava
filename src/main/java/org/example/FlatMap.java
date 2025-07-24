@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FlatMap {
 
@@ -32,27 +33,43 @@ public class FlatMap {
         personList3.add(new Person("OvidioTesla", 18));
         business.add(new Business("Tesla", personList3));
 // Printing Company Names
-        business.stream().sorted((b1,b2)->b1.getFirmaName().compareTo(b2.getFirmaName())).map(Business::getFirmaName).forEach(System.out::println);
+        business.stream().sorted((b1, b2) -> b1.getFirmaName().compareTo(b2.getFirmaName())).map(Business::getFirmaName).forEach(System.out::println);
 // Flatmap to get Employee Names
-System.out.println("\n");
-business.stream().flatMap(business1 -> business1.getPerson().stream())
-        .map(Person::getName).forEach(System.out::println);
+        System.out.println("\n");
+        business.stream().flatMap(business1 -> business1.getPerson().stream())
+                .map(Person::getName).forEach(System.out::println);
         System.out.println("\n Employees of Particular Company >Tesla \n");
         business.stream().filter(business1 -> business1.getFirmaName().equalsIgnoreCase("Tesla")).flatMap(business1 -> business1.getPerson().stream())
-                .map(Person::getName).forEach(System.out::println);
+                .map(Person::getName)
+                .forEach(System.out::println);
 
         System.out.println("\n Employees of Particular Company >Google \n");
         business.stream().filter(business1 -> business1.getFirmaName().equalsIgnoreCase("google"))
                 .flatMap(business1 -> business1.getPerson().stream())
-                .sorted((p1,p2)->p1.getName().compareTo(p2.getName())).map(Person::getName).forEach(System.out::println);
+                .sorted((p1, p2) -> p1.getName().compareTo(p2.getName())).map(Person::getName)
+                .forEach(System.out::println);
 
 
         System.out.println("\n Employees of Particular Company >Amazon - starts with A \n");
         business.stream()
                 .filter(business1 -> business1.getFirmaName().startsWith("A"))
                 .flatMap(business1 -> business1.getPerson().stream())
-                .sorted((p1,p2)->p1.getName().compareTo(p2.getName())).map(Person::getName).forEach(System.out::println);
+                .sorted((p1, p2) -> p1.getName().compareTo(p2.getName())).map(Person::getName)
+                .forEach(System.out::println);
+
+
+        System.out.println("\n Collect in Collrctors - Employees of Particular Company >Amazon/Tesla/Google - starts with A or G or T \n");
+        String names = business.stream()
+                .filter(business1 -> business1.getFirmaName().startsWith("A"))
+                .flatMap(business1 -> business1.getPerson().stream())
+                .sorted((p1, p2) -> p1.getName().compareTo(p2.getName())).map(Person::getName)
+                .collect(Collectors.joining(" , "));
+
+
+        System.out.println(names);
+
     }
+
 
 
     static class Business {
