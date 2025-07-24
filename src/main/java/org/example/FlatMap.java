@@ -32,7 +32,7 @@ public class FlatMap {
         personList3.add(new Person("OvidioTesla", 18));
         business.add(new Business("Tesla", personList3));
 // Printing Company Names
-        business.stream().map(Business::getFirmaName).forEach(System.out::println);
+        business.stream().sorted((b1,b2)->b1.getFirmaName().compareTo(b2.getFirmaName())).map(Business::getFirmaName).forEach(System.out::println);
 // Flatmap to get Employee Names
 System.out.println("\n");
 business.stream().flatMap(business1 -> business1.getPerson().stream())
@@ -42,13 +42,16 @@ business.stream().flatMap(business1 -> business1.getPerson().stream())
                 .map(Person::getName).forEach(System.out::println);
 
         System.out.println("\n Employees of Particular Company >Google \n");
-        business.stream().filter(business1 -> business1.getFirmaName().equalsIgnoreCase("google")).flatMap(business1 -> business1.getPerson().stream())
-                .map(Person::getName).forEach(System.out::println);
+        business.stream().filter(business1 -> business1.getFirmaName().equalsIgnoreCase("google"))
+                .flatMap(business1 -> business1.getPerson().stream())
+                .sorted((p1,p2)->p1.getName().compareTo(p2.getName())).map(Person::getName).forEach(System.out::println);
 
 
-        System.out.println("\n Employees of Particular Company >Amazon \n");
-        business.stream().filter(business1 -> business1.getFirmaName().equalsIgnoreCase("Amazon")).flatMap(business1 -> business1.getPerson().stream())
-                .map(Person::getName).forEach(System.out::println);
+        System.out.println("\n Employees of Particular Company >Amazon - starts with A \n");
+        business.stream()
+                .filter(business1 -> business1.getFirmaName().startsWith("A"))
+                .flatMap(business1 -> business1.getPerson().stream())
+                .sorted((p1,p2)->p1.getName().compareTo(p2.getName())).map(Person::getName).forEach(System.out::println);
     }
 
 
