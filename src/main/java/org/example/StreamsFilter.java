@@ -24,7 +24,8 @@ public class StreamsFilter {
                 majorList.add(person);
         }
 
-        List<Person> majorsStreamList = personList.stream().filter(p -> p.getAge() > 18)
+        List<Person> majorsStreamList = personList.stream()
+                .filter(p -> p.getAge() > 18)
                 .toList();
 
         System.out.println("\n Both the major lists are equal...");
