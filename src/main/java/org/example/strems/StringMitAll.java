@@ -1,8 +1,6 @@
-package org.example;
+package org.example.strems;
 
-import javax.xml.namespace.QName;
 import java.util.*;
-import java.util.stream.Stream;
 
 public class StringMitAll {
 
