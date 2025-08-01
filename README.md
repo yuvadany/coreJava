@@ -3,4 +3,5 @@ It has Core java Streams Programs.
 *  Map - Sorting - Comparable - compareTo
 *  Integer Array - Limit - forEach - String Array
 *  FlatMap - Filter  & Sorting
-*  collect(Colectors.joining(" , ")); - 
+*  collect(Colectors.joining(" , ")); -
+*  colect ( partitioningBy or groupBy)
