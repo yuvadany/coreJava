@@ -1,4 +1,4 @@
-package org.example.strems;
+package org.example.streams;
 
 
 import java.time.LocalDateTime;
