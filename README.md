@@ -1,4 +1,4 @@
-It has Core java Streams Programs.
+It has Core Programs of java Streams .
 *  Filter 
 *  Map - Sorting - Comparable - compareTo
 *  Integer Array - Limit - forEach - String Array
